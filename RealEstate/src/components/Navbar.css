@@ -1,0 +1,87 @@
+/* ===================================================== */
+/* =============== NAVBAR STYLING ======================= */
+/* ===================================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  color: #222;
+  padding: 15px 5%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #00bcd4;
+  cursor: pointer;
+}
+
+.navbar-logo span {
+  color: #ff9800;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  font-size: 1rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.navbar-links a:hover {
+  color: #00bcd4;
+  transform: translateY(-2px);
+}
+
+.navbar-btn {
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 3px 10px rgba(0, 188, 212, 0.3);
+}
+
+.navbar-btn:hover {
+  background: linear-gradient(135deg, #0097a7, #00796b);
+  transform: translateY(-2px);
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .navbar-links {
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .navbar-btn {
+    margin-top: 10px;
+  }
+}
