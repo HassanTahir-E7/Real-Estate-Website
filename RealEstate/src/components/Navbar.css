@@ -1,5 +1,5 @@
 /* ===================================================== */
-/* =============== NAVBAR STYLING ======================= */
+/* =============== NAVBAR STYLING ===================== */
 /* ===================================================== */
 .navbar {
   display: flex;
@@ -7,25 +7,26 @@
   align-items: center;
   background: white;
   color: #222;
-  padding: 15px 5%;
+  padding: 10px 5%; /* slightly smaller padding to reduce height */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 1000;
+  height: 60px; /* fix navbar height */
 }
 
-.navbar-logo h2 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #00bcd4;
+.navbar-logo .logo-img {
+  height: 50px;      /* fits inside navbar */
+  width: auto;
+  object-fit: contain;
+  transform: scale(1.7); /* makes logo look bigger without stretching navbar */
   cursor: pointer;
+  /* padding-top: 3px; */
 }
 
-.navbar-logo span {
-  color: #ff9800;
-}
 
+
+/* Navbar Links */
 .navbar-links {
   list-style: none;
   display: flex;
@@ -35,13 +36,13 @@
 }
 
 .navbar-links li {
-  font-size: 1rem;
+  font-size: 1.2rem;       /* slightly bigger text */
+  font-weight: 700;        /* bold text */
 }
 
 .navbar-links a {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
   transition: color 0.3s, transform 0.2s;
 }
 
@@ -50,12 +51,21 @@
   transform: translateY(-2px);
 }
 
+/* Active Page Link */
+.navbar-links a.active-link {
+  color: #ff9800;       /* active page in orange */
+  font-weight: 800;
+  border-bottom: 2px solid #ff9800;
+  padding-bottom: 2px;
+}
+
+/* Navbar Buttons */
 .navbar-btn {
   background: linear-gradient(135deg, #00bcd4, #0097a7);
   border: none;
   color: white;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
@@ -67,10 +77,22 @@
   transform: translateY(-2px);
 }
 
+/* Sign Out Button Red */
+.navbar-btn.signout-btn {
+  background: #e53935;
+  box-shadow: 0 3px 10px rgba(229, 57, 53, 0.3);
+}
+
+.navbar-btn.signout-btn:hover {
+  background: #c62828;
+  transform: translateY(-2px);
+}
+
 /* === Mobile Responsive === */
 @media (max-width: 768px) {
   .navbar {
     flex-wrap: wrap;
+    padding: 10px 5%;
   }
 
   .navbar-links {

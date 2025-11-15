@@ -1,14 +1,13 @@
 import React from 'react';
+import X from '../Images/X.jpg';
+import FB from '../Images/FB.webp';
+import INSTA from '../Images/Insta.webp';
+import GM from '../Images/Gmail.webp';
 import './Footer.css';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      {/* <div className="footer-top">
-        <h2>Find Your Dream Home</h2>
-        <p>Browse thousands of listings, all in one place.</p>
-        <button className="footer-cta-btn">Get Started</button>
-      </div> */}
 
       <div className="footer-links">
         <div>
@@ -30,17 +29,24 @@ const Footer = () => {
         </div>
 
         <div>
-          <h4>Follow Us</h4>
-          <ul className="social-icons">
-            <li><i className="fab fa-facebook"></i></li>
-            <li><i className="fab fa-twitter"></i></li>
-            <li><i className="fab fa-instagram"></i></li>
-          </ul>
+       <div>
+ <div>
+  <h4>Follow Us</h4>
+  <ul className="social-icons">
+    <li><img src={FB} alt="Facebook" /></li>
+    <li><img src={X} alt="X / Twitter" /></li>
+    <li><img src={INSTA} alt="Instagram" /></li>
+    <li><img src={GM} alt="Gmail" /></li>
+  </ul>
+</div>
+
+</div>
+
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <p>© 2025 RealEstate. All Rights Reserved.</p>
+      <div className="footer-bottom" style={{textAlign:'center'}}>
+        <p>© 2025 Prime Estate. All Rights Reserved.</p>
       </div>
     </footer>
   );

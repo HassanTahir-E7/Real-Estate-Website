@@ -1,0 +1,78 @@
+/* ==============================
+   ABOUT PAGE STYLING
+============================== */
+
+.about-container {
+  padding: 100px 8%;
+  background-color: #f5f8fa;
+  color: #333;
+  min-height: 80vh;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #00bcd4;
+  margin-bottom: 15px;
+}
+
+.about-subtitle {
+  font-size: 1.3rem;
+  color: #555;
+  margin-bottom: 50px;
+}
+
+.about-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 40px;
+}
+
+.about-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  padding: 30px 25px;
+  max-width: 350px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  text-align: center;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+}
+
+.about-card-icon {
+  font-size: 3rem;
+  color: #ff9800;
+  margin-bottom: 20px;
+}
+
+.about-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00bcd4;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .about-card {
+    max-width: 90%;
+  }
+}

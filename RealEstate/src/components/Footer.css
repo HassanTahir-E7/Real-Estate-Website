@@ -1,121 +1,72 @@
-/* ===================================================== */
-/* ================== FOOTER STYLING ==================== */
-/* ===================================================== */
+/* =================== FOOTER =================== */
 .footer {
-  background: #f8f9fa;
+  background: #ffffff;
+  padding: 40px 5%;
   color: #333;
-  padding-top: 60px;
-  border-top: 3px solid #00bcd4;
-  text-align: center;
+  font-family: "Poppins", sans-serif;
+  border-top: 3px solid #00bcd4; /* subtle highlight */
 }
 
-/* === Top CTA === */
-.footer-top {
-  background: linear-gradient(135deg, #00bcd4, #009688);
-  color: white;
-  padding: 60px 20px;
-  border-radius: 0 0 30px 30px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.footer-top h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.footer-top p {
-  font-size: 1.1rem;
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
   margin-bottom: 25px;
 }
 
-.footer-cta-btn {
-  background: #ffeb3b;
-  border: none;
-  padding: 14px 30px;
-  border-radius: 8px;
-  font-weight: 700;
-  color: #333;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.footer-cta-btn:hover {
-  background: #fdd835;
-}
-
-/* === Links Section === */
-.footer-links {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 60px 10%;
-  text-align: left;
-}
-
-.footer-links div {
-  flex: 1;
-  min-width: 180px;
-  margin-bottom: 30px;
-}
-
-.footer-links h4 {
-  color: #00bcd4;
-  margin-bottom: 15px;
+.footer-links div h4 {
   font-size: 1.2rem;
+  font-weight: 700;
+  color: #00bcd4;
+  margin-bottom: 12px;
 }
 
-.footer-links ul {
+.footer-links div ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footer-links li {
+.footer-links div ul li {
   margin-bottom: 10px;
-  color: #555;
-  cursor: pointer;
+  font-size: 0.95rem;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
-.footer-links li:hover {
-  color: #00bcd4;
+.footer-links div ul li:hover {
+  color: #ff9800;
 }
 
-/* === Social Icons === */
 .social-icons {
-  display: flex;
-  gap: 15px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-auto-rows: 35px; /* row height */
+  gap: 12px; /* space between icons */
+  justify-items: center; /* center each icon horizontally */
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
 }
 
 .social-icons li {
-  font-size: 1.3rem;
-  color: #333;
-  transition: color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.social-icons li:hover {
-  color: #00bcd4;
-  transform: scale(1.2);
+.social-icons li img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 8px; /* slight rounding */
 }
 
-/* === Bottom Bar === */
-.footer-bottom {
-  border-top: 1px solid #ddd;
-  padding: 20px 10px;
-  font-size: 0.95rem;
-  color: #666;
+.social-icons li img:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px #00bcd4, 0 0 20px #ff9800; /* blue + orange glow */
 }
 
-/* === Mobile Responsive === */
-@media (max-width: 768px) {
-  .footer-links {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
-}

@@ -1,23 +1,65 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import Logo from '../Images/Logo.png';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    // 🔹 Clear any login/session data
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('currentUser');
+
+    // 🔹 Redirect to login page
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar">
+      {/* Logo */}
       <div className="navbar-logo">
-        <h2>Real<span>Estate</span></h2>
+        <img src={Logo} alt="Logo" className="logo-img" />
       </div>
 
+      {/* Navigation Links */}
       <ul className="navbar-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/buy">Buy</Link></li>
-        <li><Link to="/rent">Rent</Link></li>
-        <li><Link to="/sell">Sell</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+        <li>
+          <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/buy" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            Buy
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/rent" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            Rent
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/sell" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            Sell
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            About
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            Contact
+          </NavLink>
+        </li>
       </ul>
 
-      <button className="navbar-btn">Sign In</button>
+      {/* Sign Out Button */}
+      <button className="navbar-btn signout-btn" onClick={handleSignOut}>
+        Sign Out
+      </button>
     </nav>
   );
 };

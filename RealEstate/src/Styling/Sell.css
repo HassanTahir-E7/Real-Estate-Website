@@ -1,49 +1,138 @@
+/* ================================
+   SELL PAGE — CENTERED + IMAGE UPLOAD
+================================ */
+
 .sell-container {
-  padding: 100px 8%;
-  background-color: #f3fff3;
+  padding: 90px 6%;
+  background: #f8fbff;
   text-align: center;
-  color: #333;
+  font-family: "Poppins", sans-serif;
 }
 
+/* Title */
 .sell-title {
-  font-size: 2.8rem;
-  color: #4caf50;
-  margin-bottom: 10px;
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #003b63;
+  margin-bottom: 12px;
 }
 
+/* Subtitle */
 .sell-subtitle {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 40px;
+  font-size: 1.15rem;
+  color: #666;
+  margin-bottom: 45px;
+  opacity: 0.9;
 }
 
+/* Form Wrapper */
 .sell-form {
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 35px;
+  border-radius: 22px;
+  border: 2px solid rgba(0, 174, 255, 0.15);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  transition: box-shadow 0.4s ease, border 0.3s ease;
+
+  /* ⭐ Center all form fields properly */
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
+.sell-form:hover {
+  box-shadow: 0 15px 40px rgba(0, 140, 255, 0.25);
+  border-color: #00bcd4;
+}
+
+/* Inputs + Textarea */
 .sell-form input,
 .sell-form textarea {
-  margin-bottom: 15px;
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;          /* ⭐ ensures perfect centering */
+  margin-bottom: 16px;
+  padding: 15px 14px;
   font-size: 1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: #333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sell-form button {
-  background-color: #4caf50;
-  color: white;
+.sell-form input:focus,
+.sell-form textarea:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
+  outline: none;
+}
+
+/* Textarea */
+.sell-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* ===================
+   IMAGE UPLOAD FIELD
+=================== */
+
+.sell-image-input {
+  width: 100%;
+  max-width: 100%;
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px dashed #00bcd4;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.sell-image-input:hover {
+  border-color: #009eb4;
+  background: #f0fcff;
+}
+
+.sell-image-input::-webkit-file-upload-button {
+  background: #00bcd4;
+  color: #fff;
+  padding: 8px 12px;
   border: none;
   border-radius: 8px;
-  padding: 14px;
   cursor: pointer;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+/* Submit Button */
+.sell-form button {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: 0.35s ease;
+  letter-spacing: 0.5px;
+  width: 100%;
 }
 
 .sell-form button:hover {
-  background-color: #43a047;
+  background-color: #009eb4;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 188, 212, 0.35);
 }
+
+.sell-image-label {
+  width: 100%;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #003b63;
+  margin-bottom: 6px;
+}
+

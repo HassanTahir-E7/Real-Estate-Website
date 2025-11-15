@@ -12,6 +12,12 @@ const Sell = () => {
         <input type="number" placeholder="Estimated Price ($)" required />
         <input type="text" placeholder="Contact Name" required />
         <input type="email" placeholder="Email Address" required />
+        <input
+          type="file"
+          accept="image/*"
+          className="sell-image-input"
+        />
+
         <textarea placeholder="Additional Details"></textarea>
         <button type="submit">Submit Listing</button>
       </form>
