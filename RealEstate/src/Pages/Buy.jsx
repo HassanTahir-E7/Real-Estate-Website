@@ -1,50 +1,111 @@
-import React from 'react';
-import '../Styling/Buy.css';
-import S1 from '../Images/S1.png';
-import S2 from '../Images/S2.png';
-import S3 from '../Images/S3.png';
-import S4 from '../Images/S4.png';
-import S5 from '../Images/S5.png';
-import S6 from '../Images/S6.png';
+import React, { useEffect, useState } from "react";
+import "../Styling/Buy.css";
 
 const Buy = () => {
+  const [buyListings, setBuyListings] = useState([]);
+  const [filteredListings, setFilteredListings] = useState([]);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchBuyListings = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/buy");
+        if (!response.ok) throw new Error("Failed to fetch buy listings");
+        const data = await response.json();
+        setBuyListings(data);
+        setFilteredListings(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBuyListings();
+  }, []);
+
+  // Filter listings based on search term
+  useEffect(() => {
+    const filtered = buyListings.filter((listing) =>
+      listing.address.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredListings(filtered);
+  }, [searchTerm, buyListings]);
+
+  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
+
   return (
     <div className="buy-container">
       <h1 className="buy-title">Buy Properties</h1>
       <p className="buy-subtitle">Find your dream home from our premium listings.</p>
 
-      <div className="buy-grid">
-        <div className="buy-card">
-          <img src={S1} alt="Elegant Villa" />
-          <h3>Elegant Villa</h3>
-          <p>$850,000 • 4 Beds • 3 Baths</p>
-        </div>
-        <div className="buy-card">
-          <img src={S2} alt="Modern Apartment" />
-          <h3>Modern Apartment</h3>
-          <p>$420,000 • 2 Beds • 2 Baths</p>
-        </div>
-        <div className="buy-card">
-          <img src={S3} alt="Luxury Flat" />
-          <h3>Luxury Flat</h3>
-          <p>$650,000 • 3 Beds • 2 Baths</p>
-        </div>
-        <div className="buy-card">
-          <img src={S4} alt="Family Home" />
-          <h3>Family Home</h3>
-          <p>$480,000 • 3 Beds • 2 Baths</p>
-        </div>
-        <div className="buy-card">
-          <img src={S5} alt="Penthouse Suite" />
-          <h3>Penthouse Suite</h3>
-          <p>$1,200,000 • 5 Beds • 4 Baths</p>
-        </div>
-        <div className="buy-card">
-          <img src={S6} alt="Countryside Villa" />
-          <h3>Countryside Villa</h3>
-          <p>$720,000 • 4 Beds • 3 Baths</p>
-        </div>
+      {/* Search Bar */}
+      <div className="buy-search">
+        <input
+          type="text"
+          placeholder="Search by address..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
+
+      <div className="buy-grid">
+        {filteredListings.length === 0 ? (
+          <p>No buy listings available.</p>
+        ) : (
+          filteredListings.map((listing) => (
+            <div
+              key={listing.uniqueID}
+              className="buy-card"
+              onClick={() => setSelectedProperty(listing)}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={`http://localhost:5000/images${listing.image}`}
+                alt={listing.address}
+              />
+              <h3>{listing.address}</h3>
+              <p>
+                ${listing.price} • {listing.bedrooms} Beds • {listing.bathrooms} Baths
+              </p>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Modal for property details */}
+      {selectedProperty && (
+        <div
+          className="property-modal-overlay"
+          onClick={() => setSelectedProperty(null)}
+        >
+          <div className="property-modal" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={`http://localhost:5000/images${selectedProperty.image}`}
+              alt={selectedProperty.address}
+              className="modal-img"
+            />
+            <h2>{selectedProperty.address}</h2>
+            <p><strong>Price:</strong> ${selectedProperty.price}</p>
+            <p>
+              <strong>Beds:</strong> {selectedProperty.bedrooms} •{" "}
+              <strong>Baths:</strong> {selectedProperty.bathrooms}
+            </p>
+            <p><strong>Owner:</strong> {selectedProperty.owner}</p>
+            <p><strong>Contact:</strong> {selectedProperty.contact}</p>
+            <p>{selectedProperty.details}</p>
+            <button
+              className="close-btn"
+              onClick={() => setSelectedProperty(null)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

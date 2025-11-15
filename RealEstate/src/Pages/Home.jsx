@@ -10,8 +10,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("buy");
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredLocations, setFilteredLocations] = useState([]);
-  const [allLocations, setAllLocations] = useState([]);
+  const [allListings, setAllListings] = useState([]);
+  const [filteredListings, setFilteredListings] = useState([]);
 
   // Featured listings (still using placeholder images)
   const listings = [
@@ -53,40 +53,49 @@ const Home = () => {
     },
   ];
 
-  // Fetch locations dynamically from database
+  // Fetch all buy or rent listings from backend
   useEffect(() => {
-    // Example: replace with your actual API
-    fetch(`/api/locations?type=${activeTab}`)
-      .then((res) => res.json())
-      .then((data) => setAllLocations(data))
-      .catch((err) => console.error("Error fetching locations:", err));
+    const fetchListings = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/${activeTab}`);
+        if (!response.ok) throw new Error("Failed to fetch listings");
+        const data = await response.json();
+        setAllListings(data);
+      } catch (err) {
+        console.error("Error fetching listings:", err);
+      }
+    };
+
+    fetchListings();
   }, [activeTab]);
 
-  // Input change handler with dynamic filtering
+  // Handle search input changes
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
 
     if (value.length > 0) {
-      const filtered = allLocations.filter((loc) =>
-        loc.name.toLowerCase().includes(value.toLowerCase())
+      const filtered = allListings.filter((listing) =>
+        listing.address.toLowerCase().includes(value.toLowerCase())
       );
-      setFilteredLocations(filtered);
+      setFilteredListings(filtered);
     } else {
-      setFilteredLocations([]);
+      setFilteredListings([]);
     }
   };
 
-  // Handle selection and redirect
-  const handleSelectLocation = (loc) => {
-    setSearchQuery(loc.name || loc);
-    setFilteredLocations([]);
-    navigate(`/${activeTab}?city=${encodeURIComponent(loc.name || loc)}`);
+  // When a user selects an autocomplete suggestion
+  const handleSelectListing = (listing) => {
+    setSearchQuery(listing.address);
+    setFilteredListings([]);
+    navigate(`/${activeTab}?address=${encodeURIComponent(listing.address)}`);
   };
 
-  // Handle service card click
-  const handleServiceClick = (type) => {
-    navigate(`/${type}`);
+  // When search button is clicked
+  const handleSearch = () => {
+    if (searchQuery.trim() !== "") {
+      navigate(`/${activeTab}?address=${encodeURIComponent(searchQuery)}`);
+    }
   };
 
   return (
@@ -94,23 +103,26 @@ const Home = () => {
       {/* HERO SECTION */}
       <div className="hero-section">
         <div className="hero-overlay"></div>
-
         <div className="hero-content">
           <h1 className="hero-title">
             Find Your Perfect <span className="highlight-text">Space</span>.
           </h1>
           <p className="hero-subtitle">
-            The simplest way to buy, sell, or rent your next home.
+            The simplest way to buy or rent your next home.
           </p>
 
           {/* SEARCH BOX */}
           <div className="search-widget-card">
             <div className="tab-switcher">
-              {["buy", "rent", "sell"].map((tab) => (
+              {["buy", "rent"].map((tab) => (
                 <button
                   key={tab}
                   className={`tab-btn ${activeTab === tab ? "active" : ""}`}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => {
+                    setActiveTab(tab);
+                    setSearchQuery("");
+                    setFilteredListings([]);
+                  }}
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </button>
@@ -123,34 +135,26 @@ const Home = () => {
                 placeholder={
                   activeTab === "buy"
                     ? "Search homes to buy..."
-                    : activeTab === "rent"
-                    ? "Search rental properties..."
-                    : "Enter your home address..."
+                    : "Search rental properties..."
                 }
                 value={searchQuery}
                 onChange={handleInputChange}
                 className="main-search-input"
               />
-
-              <button
-                className={`search-btn ${
-                  activeTab === "sell" ? "secondary-btn" : ""
-                }`}
-                onClick={() => handleSelectLocation({ name: searchQuery })}
-              >
-                {activeTab === "sell" ? "Get Appraisal" : "Search"}
+              <button className="search-btn" onClick={handleSearch}>
+                Search
               </button>
 
               {/* Autocomplete Dropdown */}
-              {filteredLocations.length > 0 && (
+              {filteredListings.length > 0 && (
                 <ul className="autocomplete-dropdown">
-                  {filteredLocations.map((loc, index) => (
+                  {filteredListings.map((listing) => (
                     <li
-                      key={index}
+                      key={listing.uniqueID}
                       className="autocomplete-item"
-                      onClick={() => handleSelectLocation(loc)}
+                      onClick={() => handleSelectListing(listing)}
                     >
-                      {loc.name || loc}
+                      {listing.address}
                     </li>
                   ))}
                 </ul>
@@ -193,7 +197,7 @@ const Home = () => {
         <div className="services-grid">
           <div
             className="service-card"
-            onClick={() => handleServiceClick("buy")}
+            onClick={() => navigate("buy")}
             style={{ cursor: "pointer" }}
           >
             <i className="fa-solid fa-house fa-3x service-icon"></i>
@@ -203,7 +207,7 @@ const Home = () => {
 
           <div
             className="service-card"
-            onClick={() => handleServiceClick("rent")}
+            onClick={() => navigate("rent")}
             style={{ cursor: "pointer" }}
           >
             <i className="fa-solid fa-key fa-3x service-icon"></i>
@@ -213,11 +217,11 @@ const Home = () => {
 
           <div
             className="service-card"
-            onClick={() => handleServiceClick("sell")}
+            onClick={() => navigate("sell")}
             style={{ cursor: "pointer" }}
           >
             <i className="fa-solid fa-coins fa-3x service-icon"></i>
-            <h3>Sell Your Property</h3>
+            <h3>Sell/Rent Your Property</h3>
             <p>Get free appraisals & reach real buyers.</p>
           </div>
         </div>

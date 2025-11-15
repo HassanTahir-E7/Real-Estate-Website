@@ -1,12 +1,55 @@
 /* ================================
    SELL PAGE — CENTERED + IMAGE UPLOAD
-================================ */
+================================= */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+  background: #f5f8fa;
+  font-family: "Ubuntu", sans-serif;
+}
 
 .sell-container {
   padding: 90px 6%;
   background: #f8fbff;
   text-align: center;
   font-family: "Poppins", sans-serif;
+}
+
+/* Logo inside the form */
+.form-logo-wrapper {
+  text-align: center;
+  margin-bottom: 25px; /* space between logo and inputs */
+}
+
+.form-logo {
+  width: 120px; /* adjust as needed */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Listing type options centered in one line without heading */
+.listing-type-options {
+  display: inline-flex;          /* inline-flex to respect content width */
+  justify-content: center;       /* center content */
+  gap: 40px;                     /* space between Sell and Rent */
+  margin: 0 auto 20px auto;      /* center in parent, with bottom margin */
+}
+
+.listing-type-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;                      /* space between radio and text */
+  font-weight: 500;
+  font-size: 1rem;
+  color: #003b63;
+  margin: 0;
+}
+
+/* Make parent form-group not stretch the listing type row */
+.form-group.listing-type {
+  width: 100%;
+  display: flex;
+  justify-content: center;       /* center the .listing-type-options */
 }
 
 /* Title */
@@ -25,6 +68,14 @@
   opacity: 0.9;
 }
 
+/* ================================
+   SELL PAGE — CLEAN INPUTS + HEADING ALIGN
+================================= */
+
+/* ================================
+   SELL PAGE — HOVER + FOCUS ANIMATION
+================================= */
+
 /* Form Wrapper */
 .sell-form {
   max-width: 650px;
@@ -32,42 +83,84 @@
   background: rgba(255, 255, 255, 0.92);
   padding: 35px;
   border-radius: 22px;
-  border: 2px solid rgba(0, 174, 255, 0.15);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(10px);
-  transition: box-shadow 0.4s ease, border 0.3s ease;
-
-  /* ⭐ Center all form fields properly */
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
 }
 
-.sell-form:hover {
-  box-shadow: 0 15px 40px rgba(0, 140, 255, 0.25);
-  border-color: #00bcd4;
+/* Form Group */
+.sell-form .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 16px;
+}
+
+/* Labels */
+.sell-form .form-group label {
+  font-weight: 600;
+  color: #003b63;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  width: 100%;
 }
 
 /* Inputs + Textarea */
+/* Force inputs and textarea to always be light grey */
 .sell-form input,
 .sell-form textarea {
-  width: 100%;
-  max-width: 100%;          /* ⭐ ensures perfect centering */
-  margin-bottom: 16px;
-  padding: 15px 14px;
-  font-size: 1rem;
+  background-color: #f0f0f0 !important;  /* light grey */
+  color: #333 !important;                /* dark text */
+  border: none;
   border-radius: 12px;
-  border: 2px solid rgba(0, 0, 0, 0.12);
-  background: #fff;
-  color: #333;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
+  padding: 14px 16px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto 16px;
+  box-shadow: none;
+}
+
+/* Remove any backdrop effects from container affecting input */
+.sell-form {
+  backdrop-filter: none; /* temporarily disable for inputs */
+}
+
+/* Add hover/focus */
+.sell-form input:hover,
+.sell-form textarea:hover {
+  background-color: #e6e6e6 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .sell-form input:focus,
 .sell-form textarea:focus {
-  border-color: #00bcd4;
+  background-color: #e6e6e6 !important;
   box-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
   outline: none;
+}
+
+/* Hover effect on all input fields */
+.sell-form input:hover,
+.sell-form textarea:hover {
+  background-color: #e6e6e6; /* slightly darker on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Focus effect */
+.sell-form input:focus,
+.sell-form textarea:focus {
+  outline: none;
+  background-color: #e6e6e6;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
+  transform: translateY(-1px);
 }
 
 /* Textarea */
@@ -76,26 +169,26 @@
   resize: vertical;
 }
 
-/* ===================
-   IMAGE UPLOAD FIELD
-=================== */
-
+/* Image Upload */
 .sell-image-input {
   width: 100%;
-  max-width: 100%;
-  background: #fff;
+  background: #f0f0f0;
   padding: 14px;
   border-radius: 12px;
-  border: 2px dashed #00bcd4;
+  border: 2px dashed #cccccc;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.3s ease, transform 0.2s ease;
+  margin-top: 4px;
 }
 
+/* Hover effect on image upload */
 .sell-image-input:hover {
-  border-color: #009eb4;
-  background: #f0fcff;
+  border-color: #00bcd4;
+  background: #e6f7ff;
+  transform: translateY(-2px);
 }
 
+/* Webkit file button */
 .sell-image-input::-webkit-file-upload-button {
   background: #00bcd4;
   color: #fff;
@@ -116,9 +209,9 @@
   cursor: pointer;
   font-size: 1.15rem;
   font-weight: 600;
-  transition: 0.35s ease;
-  letter-spacing: 0.5px;
-  width: 100%;
+  margin-left: 20px;
+  width: 75%;
+  transition: 0.35s ease, transform 0.2s ease;
 }
 
 .sell-form button:hover {
@@ -126,13 +219,3 @@
   transform: translateY(-3px);
   box-shadow: 0 10px 24px rgba(0, 188, 212, 0.35);
 }
-
-.sell-image-label {
-  width: 100%;
-  text-align: left;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #003b63;
-  margin-bottom: 6px;
-}
-

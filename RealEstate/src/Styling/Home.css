@@ -1,8 +1,12 @@
 /* GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+
 body {
   background: #f5f8fa;
-  font-family: "Poppins", sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
+
 body, html, #root {
   margin: 0;
   padding: 0;
@@ -128,24 +132,35 @@ text-decoration: underline;
   margin-bottom: 25px;
 }
 
+/* Featured Listings Container */
 .scroll-container {
   display: flex;
-  overflow-x: auto;
-  gap: 30px;
+  justify-content: center; /* Center the items horizontally */
+  flex-wrap: wrap;         /* Allow wrapping to next line if screen is small */
+  gap: 20px;               /* Space between cards */
   padding: 20px 0;
-  scroll-behavior: smooth;
 }
 
+/* Featured Card */
 .featured-card {
-  min-width: 300px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(0, 174, 255, 0.2);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  transition: 0.35s ease;
+  width: 250px;            /* Or any fixed width you prefer */
+  background-color: #fff;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;      /* Center text inside each card */
 }
+
+.featured-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.featured-info {
+  padding: 10px;
+}
+
 
 .featured-card:hover {
   transform: translateY(-10px);
@@ -157,7 +172,7 @@ text-decoration: underline;
   width: 100%;
   height: 200px;
   object-fit: cover;
-}
+} 
 
 .featured-info {
   padding: 18px;
